@@ -20,11 +20,10 @@ func (m *Menu) Draw (screen *ebiten.Image) {
 func (m *Menu) Update(g *Game) error {
 	mgr.Update(1.0/60.0)
 	bole := true
-	flags := imgui.WindowFlagsNoTitleBar + imgui.WindowFlagsNoResize + imgui.WindowFlagsNoMove + imgui.WindowFlagsNoCollapse + imgui.WindowFlagsAlwaysAutoResize
 	mgr.BeginFrame()
 	{
 		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 100, 720 / 2 - 200})
-		imgui.BeginV("Menu", &bole, flags)
+		imgui.BeginV("Menu", &bole, gui_flags)
 
 		if imgui.ButtonV("New Game", imgui.Vec2{ 200, 200 }) {
 			fmt.Println("nouvelle partie :)")
