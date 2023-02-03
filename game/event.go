@@ -1,12 +1,12 @@
 package game
 
 type Event struct {
-	id		int
-	title		string
-	description	string
-	choices		[]int
+	Id		int
+	Title		string
+	Description	string
+	Choices		[]int
 }
 
-func LoadEvents () *Event {
-	
+func LoadEvents () []*Event {
+	return []*Event{}	
 }
