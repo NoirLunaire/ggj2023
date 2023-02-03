@@ -13,7 +13,7 @@ func (g *Game) Draw(screen *ebiten.Image) {
 }
 
 func (g *Game) Update() error {
-	return g.current_scene.Update()	
+	return g.current_scene.Update(g)	
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {

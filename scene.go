@@ -7,5 +7,5 @@ import (
 type Scene interface {
 	Draw(screen *ebiten.Image)
 	Layout(outsideWidth, outsideHeight int) (int, int)	
-	Update() error
+	Update(g *Game) error
 }

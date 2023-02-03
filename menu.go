@@ -12,11 +12,13 @@ import (
 
 type Menu struct {
 	mgr *renderer.Manager
+	counter int
 }
 
 func NewMenu () *Menu {
 	return &Menu {
 		mgr: renderer.New(nil),
+		counter: 0,
 	}
 }
 
@@ -26,7 +28,7 @@ func (m *Menu) Draw (screen *ebiten.Image) {
 	m.mgr.Draw(screen)
 }
 
-func (m *Menu) Update() error {
+func (m *Menu) Update(g *Game) error {
 	m.mgr.Update(1.0/60.0)
 	bole := true
 	flags := imgui.WindowFlagsNoTitleBar + imgui.WindowFlagsNoResize + imgui.WindowFlagsNoMove + imgui.WindowFlagsNoCollapse + imgui.WindowFlagsAlwaysAutoResize
@@ -36,6 +38,7 @@ func (m *Menu) Update() error {
 		imgui.BeginV("Menu", &bole, flags)
 
 		if imgui.ButtonV("New Game", imgui.Vec2{ 200, 200 }) {
+			fmt.Println("nouvelle partie :)")
 		}
 		if imgui.ButtonV("Quit Game", imgui.Vec2{ 200, 200 }) {
 			return quit_game
