@@ -12,13 +12,11 @@ import (
 
 type Menu struct {
 	mgr *renderer.Manager
-	counter int
 }
 
 func NewMenu () *Menu {
 	return &Menu {
 		mgr: renderer.New(nil),
-		counter: 0,
 	}
 }
 
