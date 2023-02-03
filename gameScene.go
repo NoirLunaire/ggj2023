@@ -13,12 +13,6 @@ type GameScene struct {
 	mgr *renderer.Manager
 }
 
-func NewGameScene () *GameScene {
-	return &GameScene {
-		mgr: renderer.New(nil),
-	}
-}
-
 func (m *GameScene) Draw (screen *ebiten.Image) {
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("Game Scene"))

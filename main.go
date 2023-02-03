@@ -5,7 +5,8 @@ import (
 )
 
 func main() {
-	ebiten.SetFullscreen(true);
+	ebiten.SetWindowSize(1280, 720) 
+	//ebiten.SetFullscreen(true);
 
 	g := &Game{
 		current_scene: NewMenu(),

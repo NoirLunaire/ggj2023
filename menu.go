@@ -37,7 +37,9 @@ func (m *Menu) Update(g *Game) error {
 
 		if imgui.ButtonV("New Game", imgui.Vec2{ 200, 200 }) {
 			fmt.Println("nouvelle partie :)")
-			g.current_scene = NewGameScene() 
+			g.current_scene = &GameScene{
+				mgr: m.mgr,
+			}
 		}
 		if imgui.ButtonV("Quit Game", imgui.Vec2{ 200, 200 }) {
 			return quit_game
