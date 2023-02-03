@@ -9,7 +9,7 @@ func main() {
 	//ebiten.SetFullscreen(true);
 
 	g := &Game{
-		current_scene: NewMenu(),
+		current_scene: &Menu{},
 	}
 
 	if err := ebiten.RunGame(g); err != nil {
