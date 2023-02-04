@@ -25,15 +25,15 @@ func (m *Menu) Update(g *Game) error {
 		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 300, 720 / 2 - 150})
 		imgui.BeginV("Menu", &bole, gui_flags)
 		setColor(0);
-		if imgui.ButtonV("Nouvelle partie", imgui.Vec2{ 200, 300 }) {
-			fmt.Println("nouvelle partie :)")
-			g.current_scene = NewGame()
+		if imgui.ButtonV("Jouer", imgui.Vec2{ 200, 300 }) {
+			fmt.Println("Jouer :)")
+			g.current_scene = &SelectGame{}
 		}
 		imgui.PopStyleColor()
 		imgui.PopStyleColor()
 		setColor(1)
 		imgui.SameLine();
-		if imgui.ButtonV("Paramètre", imgui.Vec2{ 200, 300 }) {
+		if imgui.ButtonV("Paramètres", imgui.Vec2{ 200, 300 }) {
 			fmt.Println("paramètre scene")
 			g.current_scene = NewSettings()
 		}
@@ -41,7 +41,7 @@ func (m *Menu) Update(g *Game) error {
 		imgui.PopStyleColor()
 		setColor(2)
 		imgui.SameLine();
-		if imgui.ButtonV("Quit Game", imgui.Vec2{ 200, 300 }) {
+		if imgui.ButtonV("Quitter le jeu", imgui.Vec2{ 200, 300 }) {
 			return quit_game
 		}
 		imgui.PopStyleColor()
