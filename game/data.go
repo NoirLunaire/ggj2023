@@ -1,11 +1,11 @@
 package game
 
 type State struct {
-	king_age	int
-	year		int	
+	King_age	int
+	Year		int	
 
-	happiness	int
-	money		int
-	population	int
+	Happiness	int
+	Money		int
+	Population	int
 }
 
