@@ -8,6 +8,7 @@ func main() {
 	ebiten.SetWindowSize(1280, 720) 
 	//ebiten.SetFullscreen(true);
 
+	ImguiStyle()
 	g := &Game{
 		current_scene: &Menu{},
 	}

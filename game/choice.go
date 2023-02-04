@@ -15,7 +15,7 @@ type Choice struct {
 }
 
 func LoadChoices () []*Choice {
-	file, err := os.Open("../data/dialog/choices.csv")
+	file, err := os.Open("data/dialog/choices.csv")
 	if err != nil {
 		fmt.Println("Error while trying opening csv file (choices.csv):", err)
 		return nil

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"image/color"
+	"math/rand"
 	"strconv"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
@@ -37,21 +38,10 @@ func NewGame () *GameScene {
 	})
 	
 	return &GameScene{
-		&State{
-			18,
-			1000,
-			10,
-			10,
-			10,
-		},
+		NewState(),
 		ourFont,
-		true,
-		&Event{
-			0,
-			"Test",
-			"Ceci est un test messir ! Vous avez les choix suivants : ",
-			[]int{ 0, 1 },
-		}, // debug event
+		false,
+		nil,
 	}
 }
 
@@ -67,21 +57,29 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 			imgui.BeginV(m.current_event.Title, &bole, imgui.WindowFlagsNoResize + imgui.WindowFlagsNoMove + imgui.WindowFlagsNoCollapse + imgui.WindowFlagsAlwaysAutoResize)
 			imgui.Text(m.current_event.Description)
 			for i := 0; i < len(m.current_event.Choices); i++ {
-				if imgui.Button( strconv.Itoa(m.current_event.Choices[i]) ) {
-					fmt.Println("choix: ", m.current_event.Choices[i])
-					switch m.current_event.Choices[i] {
-						case 0:
-							m.game_state.Money -= 3
-							fmt.Println("-3 money :)")
-						case 1:
-							m.game_state.Population -= 5
-							fmt.Println("-5 pop :)")
-					}
+				if imgui.Button( m.game_state.ChoiceList[m.current_event.Choices[i]].Title ) {
+					m.game_state.Effects[m.current_event.Choices[i]](m.game_state)
 					m.has_event = false
+					m.current_event = nil
+					break
 				}
 			}
 			imgui.End()
 		}
+
+		if !m.has_event {
+			imgui.SetNextWindowPos(imgui.Vec2{ 1000, 650 })
+			imgui.BeginV("next", &bole, gui_flags)
+			if imgui.ButtonV("Next !", imgui.Vec2{50, 50}) {
+				if len(m.game_state.EventPool) > 0 {
+					r := rand.Intn(len(m.game_state.EventPool))
+					m.current_event = m.game_state.EventList[m.game_state.EventPool[r]]
+					m.has_event = true
+				}
+			}
+			imgui.End()
+		}
+
 	}
 	mgr.EndFrame()
 

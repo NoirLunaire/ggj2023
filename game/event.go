@@ -16,7 +16,7 @@ type Event struct {
 }
 
 func LoadEvents () []*Event {
-	file, err := os.Open("../data/dialog/events.csv")
+	file, err := os.Open("data/dialog/events.csv")
 	if err != nil {
 		fmt.Println("Error while trying opening csv file (events.csv):", err)
 		return nil

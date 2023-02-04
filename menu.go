@@ -38,19 +38,8 @@ func (m *Menu) Update(g *Game) error {
 	return nil
 }
 
-/*
-	id		int
-	title		string
-	description	string
-	choices		[]int
-
-	game_state	*State
-	has_event	bool
-	current_event	*Event
-
-*/
-
 func (m *Menu) Layout (outsideWidth, outsideHeight int) (int, int) {	
 	mgr.SetDisplaySize(float32(1280), float32(720))
 	return 1280, 720
 }
+
