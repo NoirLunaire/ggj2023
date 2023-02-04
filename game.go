@@ -19,3 +19,11 @@ func (g *Game) Update() error {
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return g.current_scene.Layout(1280, 720)
 }
+
+func applySettings() {
+	setting := NewSettings()
+	
+	ebiten.SetFullscreen(setting.fullscreen);
+
+	//set sound volume
+}

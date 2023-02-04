@@ -6,7 +6,7 @@ import (
 
 func main() {
 	ebiten.SetWindowSize(1280, 720) 
-	//ebiten.SetFullscreen(true);
+	applySettings()
 
 	ImguiStyle()
 	g := &Game{

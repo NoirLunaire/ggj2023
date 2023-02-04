@@ -22,14 +22,20 @@ func (m *Menu) Update(g *Game) error {
 	bole := true
 	mgr.BeginFrame()
 	{
-		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 100, 720 / 2 - 200})
+		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 300, 720 / 2 - 50})
 		imgui.BeginV("Menu", &bole, gui_flags)
 
-		if imgui.ButtonV("New Game", imgui.Vec2{ 200, 200 }) {
+		if imgui.ButtonV("Nouvelle partie", imgui.Vec2{ 200, 100 }) {
 			fmt.Println("nouvelle partie :)")
 			g.current_scene = NewGame()
 		}
-		if imgui.ButtonV("Quit Game", imgui.Vec2{ 200, 200 }) {
+		imgui.SameLine();
+		if imgui.ButtonV("Paramètre", imgui.Vec2{ 200, 100 }) {
+			fmt.Println("paramètre scene")
+			g.current_scene = NewSettings()
+		}
+		imgui.SameLine();
+		if imgui.ButtonV("Quit Game", imgui.Vec2{ 200, 100 }) {
 			return quit_game
 		}
 		imgui.End()
