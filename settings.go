@@ -83,7 +83,6 @@ func (m *SettingsScene) Update(g *Game) error {
 		}
 		imgui.SameLine();
 		if imgui.ButtonV("Appliquer changements", imgui.Vec2{ 200, 50 }) {
-			applySettings()
 
 			fmt.Println("Appliquer changements")
 			
@@ -107,6 +106,7 @@ func (m *SettingsScene) Update(g *Game) error {
 			}
 
 			fmt.Println("Write successful")
+			applySettings()
 			
 		}
 		//fmt.Println("Effects Volume :",&m.effectsVolume)

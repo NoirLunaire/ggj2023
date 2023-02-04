@@ -32,6 +32,8 @@ type GameScene struct {
 
 func NewGame () *GameScene {
 	s, err := mp3.DecodeWithoutResampling(bytes.NewReader(music.Ost_mp3))
+	settings := NewSettings()
+
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -41,6 +43,8 @@ func NewGame () *GameScene {
 	if err != nil {
 		log.Fatal(err)
 	}
+	player.SetVolume(float64(settings.musicVolume))
+
 	tt, err := opentype.Parse(fonts.MPlus1pRegular_ttf)
 	if err != nil {
 		log.Fatal(err)

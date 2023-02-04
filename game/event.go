@@ -1,10 +1,11 @@
 package game
 
 import (
-	"encoding/csv"
 	"fmt"
 	"os"
 	"strconv"
+	"bufio"
+	"strings"
 )
 
 
@@ -16,27 +17,40 @@ type Event struct {
 }
 
 func LoadEvents () []*Event {
-	file, err := os.Open("data/dialog/events.csv")
+	file, err := os.Open("./data/dialog/events.csv")
 	if err != nil {
-		fmt.Println("Error while trying opening csv file (events.csv):", err)
+		fmt.Println("Error opening file (events.csv) :", err)
 		return nil
 	}
 	defer file.Close()
 
-	reader := csv.NewReader(file)
-	records, err := reader.ReadAll()
-	if err != nil {
-		fmt.Println("Error reading CSV (events.csv):", err)
+	// Create a new scanner to read the file line by line
+	scanner := bufio.NewScanner(file)
+
+	// Create a slice to store the contents of the file
+	lines := make([]string, 0)
+
+	// Read each line of the file
+	for scanner.Scan() {
+		line := scanner.Text()
+		lines = append(lines, line)
+	}
+
+	// Check for any errors that may have occurred during scanning
+	if err := scanner.Err(); err != nil {
+		fmt.Println("Error reading file (events.csv) :", err)
 		return nil
-	}	
+	}
+
 	
 	tab := []*Event{}
 
-	for _, value := range records {
+	for _, value := range lines {
+		res := strings.Split(value,";")
 		tabChoice := []int{}
 	
-		for i := 3 ; i < len(value); i++ {
-			casted, err := strconv.Atoi(value[i])
+		for i := 3 ; i < len(res); i++ {
+			casted, err := strconv.Atoi(res[i])
 			if err != nil {
 				fmt.Println("Error converting string to int:", err)
 				return nil
@@ -44,7 +58,7 @@ func LoadEvents () []*Event {
 			tabChoice = append(tabChoice,casted)
 		}
 
-		id, err := strconv.Atoi(value[0])
+		id, err := strconv.Atoi(res[0])
 			if err != nil {
 				fmt.Println("Error converting string to int:", err)
 				return nil
@@ -52,8 +66,8 @@ func LoadEvents () []*Event {
 		
 		tab = append(tab,&Event{
 			id,
-			value[1],
-			value[2],
+			res[1],
+			res[2],
 			tabChoice,
 		}) 
 	}

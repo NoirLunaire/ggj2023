@@ -12,3 +12,8 @@ var (
 	gui_flags = imgui.WindowFlagsNoTitleBar + imgui.WindowFlagsNoResize + imgui.WindowFlagsNoMove + imgui.WindowFlagsNoCollapse + imgui.WindowFlagsAlwaysAutoResize
 )
 
+const (
+	Blue int = iota
+	White 
+	Red
+)
