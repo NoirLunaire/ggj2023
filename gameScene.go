@@ -35,8 +35,9 @@ func NewGame () *GameScene {
 	if err != nil {
 		log.Fatal(err)
 	}
-	context := audio.NewContext(32000) // wtf ?
-	player, err := context.NewPlayer(s)
+	context := audio.NewContext(44100)
+	loop := audio.NewInfiniteLoop(s, s.Length() - 1)
+	player, err := context.NewPlayer(loop)
 	if err != nil {
 		log.Fatal(err)
 	}
