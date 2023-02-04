@@ -11,4 +11,12 @@ func LoseMoney (s *State) {
 func LoseHap (s *State) {
 	s.Happiness -= 3
 }
- 
+
+func WinHap (s *State) {
+	s.Happiness += 1
+}
+
+func HapForMoney (s *State) {
+	s.Happiness -= 2
+	s.Money += 1
+} 

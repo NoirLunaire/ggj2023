@@ -3,28 +3,43 @@ package main
 import (
 	"fmt"
 	"log"
+	"bytes"
 	"image/color"
 	"math/rand"
 	"strconv"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
+	"github.com/hajimehoshi/ebiten/v2/audio/mp3"
+	music "ggj2023/data/music"
 
 	. "ggj2023/game"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/inkyblackness/imgui-go/v4"
 	"github.com/hajimehoshi/ebiten/v2/text"
+	"github.com/hajimehoshi/ebiten/v2/audio"
 )
 
 type GameScene struct {
 	game_state	*State
 	font		font.Face
+	audioContext	*audio.Context
+	audioPlayer	*audio.Player
 	has_event	bool
 	current_event	*Event
 }
 
 func NewGame () *GameScene {
+	s, err := mp3.DecodeWithoutResampling(bytes.NewReader(music.Ost_mp3))
+	if err != nil {
+		log.Fatal(err)
+	}
+	context := audio.NewContext(32000) // wtf ?
+	player, err := context.NewPlayer(s)
+	if err != nil {
+		log.Fatal(err)
+	}
 	tt, err := opentype.Parse(fonts.MPlus1pRegular_ttf)
 	if err != nil {
 		log.Fatal(err)
@@ -37,9 +52,12 @@ func NewGame () *GameScene {
 		Hinting: font.HintingFull,
 	})
 	
+	player.Play()
 	return &GameScene{
 		NewState(),
 		ourFont,
+		context,
+		player,
 		false,
 		nil,
 	}
@@ -62,6 +80,9 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 					m.has_event = false
 					m.current_event = nil
 					break
+				}
+				if imgui.IsItemHovered() {
+					imgui.SetTooltip(m.game_state.ChoiceList[m.current_event.Choices[i]].Description)
 				}
 			}
 			imgui.End()
@@ -94,6 +115,9 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 }
 
 func (m *GameScene) Update(g *Game) error {
+	if !m.audioPlayer.IsPlaying() {
+		m.audioPlayer.Play()
+	}
 	return nil
 }
 

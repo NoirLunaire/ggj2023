@@ -35,7 +35,7 @@ func LoadEvents () []*Event {
 	for _, value := range records {
 		tabChoice := []int{}
 	
-		for i := 3 ; i < len(value); i++{
+		for i := 3 ; i < len(value); i++ {
 			casted, err := strconv.Atoi(value[i])
 			if err != nil {
 				fmt.Println("Error converting string to int:", err)

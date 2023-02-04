@@ -21,7 +21,7 @@ func NewState () *State {
 		10,
 		10,
 		10,
-		[]int{ 0 },
+		[]int{ 1 },
 		LoadEvents(),
 		LoadChoices(),
 		LoadEffects(),
@@ -32,6 +32,7 @@ func LoadEffects () map[int]func(s *State) {
 	m := make(map[int]func(s *State))
 	m[0] = LosePop
 	m[1] = LoseMoney
-	m[2] = LoseHap
+	m[2] = WinHap
+	m[3] = HapForMoney
 	return m
 }

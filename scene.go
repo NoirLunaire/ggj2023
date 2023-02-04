@@ -15,4 +15,5 @@ func ImguiStyle () {
 	imgui.PushStyleColor(21, imgui.Vec4{ 0.7, 0, 0, 1.0 })
 	imgui.PushStyleColor(22, imgui.Vec4{ 1.0, 0, 0, 1.0 })
 	imgui.PushStyleColor(23, imgui.Vec4{ 1.0, 0, 0, 1.0 })
+	imgui.PushStyleColor(11, imgui.Vec4{ 0.7, 0, 0, 1.0 })
 }
