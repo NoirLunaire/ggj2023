@@ -27,7 +27,7 @@ func (m *Menu) Update(g *Game) error {
 
 		if imgui.ButtonV("New Game", imgui.Vec2{ 200, 200 }) {
 			fmt.Println("nouvelle partie :)")
-			g.current_scene = &GameScene{}
+			g.current_scene = NewGame()
 		}
 		if imgui.ButtonV("Quit Game", imgui.Vec2{ 200, 200 }) {
 			return quit_game
@@ -37,6 +37,18 @@ func (m *Menu) Update(g *Game) error {
 	mgr.EndFrame()
 	return nil
 }
+
+/*
+	id		int
+	title		string
+	description	string
+	choices		[]int
+
+	game_state	*State
+	has_event	bool
+	current_event	*Event
+
+*/
 
 func (m *Menu) Layout (outsideWidth, outsideHeight int) (int, int) {	
 	mgr.SetDisplaySize(float32(1280), float32(720))
