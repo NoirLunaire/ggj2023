@@ -7,7 +7,6 @@ import (
 	"strconv"
 )
 
-
 type Choice struct {
 	Id		int
 	Title		string

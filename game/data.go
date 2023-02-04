@@ -1,8 +1,12 @@
 package game
 
+import (
+	"time"
+)
+
 type State struct {
 	King_age	int
-	Year		int	
+	Date		time.Time
 
 	Happiness	int
 	Money		int
@@ -17,7 +21,7 @@ type State struct {
 func NewState () *State {
 	return &State{
 		18,
-		1000,
+		time.Date(1000, time.January, 1, 12, 0, 0, 0, time.UTC),
 		10,
 		10,
 		10,

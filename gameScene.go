@@ -27,6 +27,8 @@ type GameScene struct {
 	audioContext	*audio.Context
 	audioPlayer	*audio.Player
 	has_event	bool
+	is_pause	bool
+	timer		float64
 	current_event	*Event
 }
 
@@ -64,11 +66,19 @@ func NewGame () *GameScene {
 		context,
 		player,
 		false,
+		false,
+		5 * ebiten.ActualTPS(),
 		nil,
 	}
 }
 
 func (m *GameScene) Draw (screen *ebiten.Image) {
+	if !m.is_pause {
+		if int(m.timer) % int(ebiten.CurrentTPS()) == 0 {
+			m.game_state.Date = m.game_state.Date.AddDate(0, 0, 1)
+		}
+		m.timer -= 1
+	}
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
 	mgr.Update(1.0/60.0)
 	bole := true
@@ -83,7 +93,9 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 				if imgui.Button( m.game_state.ChoiceList[m.current_event.Choices[i]].Title ) {
 					m.game_state.Effects[m.current_event.Choices[i]](m.game_state)
 					m.has_event = false
+					m.timer = ebiten.ActualTPS() * 6
 					m.current_event = nil
+					m.is_pause = false
 					break
 				}
 				if imgui.IsItemHovered() {
@@ -93,19 +105,21 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 			imgui.End()
 		}
 
-		if !m.has_event {
-			imgui.SetNextWindowPos(imgui.Vec2{ 1000, 650 })
-			imgui.BeginV("next", &bole, gui_flags)
-			if imgui.ButtonV("Next !", imgui.Vec2{50, 50}) {
-				if len(m.game_state.EventPool) > 0 {
-					r := rand.Intn(len(m.game_state.EventPool))
-					m.current_event = m.game_state.EventList[m.game_state.EventPool[r]]
-					m.has_event = true
-				}
+		if m.timer <= 0 {
+			if len(m.game_state.EventPool) > 0 {
+				r := rand.Intn(len(m.game_state.EventPool))
+				m.current_event = m.game_state.EventList[m.game_state.EventPool[r]]
+				m.has_event = true
+				m.is_pause = true
 			}
-			imgui.End()
 		}
 
+		imgui.SetNextWindowPos(imgui.Vec2{ 1000, 650 })
+		imgui.BeginV("next", &bole, gui_flags)
+		if imgui.ButtonV("Pause", imgui.Vec2{50, 50}) {
+			m.is_pause = !m.is_pause
+		}
+		imgui.End()
 	}
 	mgr.EndFrame()
 
@@ -113,7 +127,11 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	text.Draw(screen, "Happiness : " + strconv.Itoa(m.game_state.Happiness), m.font, 30, 100, color.White)
 	text.Draw(screen, "Money : " + strconv.Itoa(m.game_state.Money), m.font, 30, 150, color.White)
 	text.Draw(screen, "Population : " + strconv.Itoa(m.game_state.Population), m.font, 30, 200, color.White)
-
+	if m.is_pause {
+		text.Draw(screen, m.game_state.Date.Format("02-01-2006"), m.font, 30, 250, color.White)
+	} else {
+		text.Draw(screen, m.game_state.Date.Format("02-01-2006"), m.font, 30, 250, color.White)
+	}
 	// draw tps
 	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()))
 	mgr.Draw(screen)
