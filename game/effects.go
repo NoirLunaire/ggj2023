@@ -2,8 +2,9 @@ package game
 
 func Nothing (s *State) {}
 
-// 10 should add event
-// H M P
+func BuildTower (s *State) {
+	s.Tower = 1
+}
 
 func addEvents (s *State) {
 	s.EventPool = []int{ 1, 2, 3, 4 }
@@ -53,4 +54,8 @@ func P1HapM1Mon (s *State) {
 
 func M5Mon (s *State) {
 	s.Money -= 5
+}
+
+func M3Hap (s *State) {
+	s.Happiness -= 3
 }

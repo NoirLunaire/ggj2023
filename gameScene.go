@@ -118,6 +118,14 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	screen.DrawImage(m.imgBgLeft, op)
 	op.GeoM.Translate(740 - float64(diff), 0)
 	screen.DrawImage(m.imgBgRight, op)
+
+	if m.game_state.Tower == 1 {
+		op = &ebiten.DrawImageOptions{}
+		op.GeoM.Translate(0, 0)
+		op.GeoM.Scale(1, 1)
+		screen.DrawImage(m.builtTower, op)
+	}
+
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(0, 0)
 	op.GeoM.Scale(0.67, 0.562)

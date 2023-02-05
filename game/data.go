@@ -25,6 +25,7 @@ type State struct {
 	Population	int
 	EventPool	[]int
 
+	Tower		int
 	EventList	[]*Event
 	ChoiceList	[]*Choice
 	Effects		map[int]func(s *State)
@@ -45,6 +46,7 @@ func NewState () *State {
 		5,
 		5,
 		[]int{ 0 },
+		-1,
 		LoadEvents(),
 		LoadChoices(),
 		LoadEffects(),
@@ -68,6 +70,8 @@ func LoadEffects () map[int]func(s *State) {
 	m[12] = P1HapM1Mon
 	m[13] = M1Hap
 	m[14] = M5Mon
+	m[38] = BuildTower
+	m[39] = M3Hap
 	return m
 }
 
