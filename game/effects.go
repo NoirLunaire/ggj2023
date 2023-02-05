@@ -5,6 +5,10 @@ func Nothing (s *State) {}
 // 10 should add event
 // H M P
 
+func addEvents (s *State) {
+	s.EventPool = []int{ 1, 2, 3, 4 }
+}
+
 func P1Hap (s *State) {
 	s.Happiness += 1
 }
@@ -42,3 +46,11 @@ func P1HapM2Mon (s *State) {
 	s.Happiness += 1
 }
 
+func P1HapM1Mon (s *State) {
+	s.Money -= 1
+	s.Happiness += 1
+}
+
+func M5Mon (s *State) {
+	s.Money -= 5
+}
