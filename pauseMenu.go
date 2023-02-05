@@ -39,8 +39,7 @@ func (m *PauseMenu) Update (g *Game) error {
 
 		setColor(1)
 		imgui.SameLine();
-		if imgui.ButtonV("Settings", imgui.Vec2{ 200, 300 }) {
-			fmt.Println("Settings")
+		if imgui.ButtonV("Paramètre", imgui.Vec2{ 200, 300 }) {
 			g.current_scene = NewSettings(m.gameData)
 		}
 		imgui.PopStyleColor()
