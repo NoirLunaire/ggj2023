@@ -30,13 +30,20 @@ type State struct {
 	Effects		map[int]func(s *State)
 }
 
+func EndGame (s *State) bool {
+	if s.Happiness <= 0 { return true }
+	if s.Money <= 0 { return true }
+	if s.Population <= 0 { return true }
+	return false
+}
+
 func NewState () *State {
 	return &State{
-		18,
+		15,
 		time.Date(1000, time.January, 1, 12, 0, 0, 0, time.UTC),
-		10,
-		10,
-		10,
+		5,
+		5,
+		5,
 		[]int{ 0 },
 		LoadEvents(),
 		LoadChoices(),

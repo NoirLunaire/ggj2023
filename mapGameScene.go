@@ -20,8 +20,6 @@ type MapGameScene struct {
 	imgBackground	*ebiten.Image
 }
 	
-	
-
 func NewGameMap (m *GameScene) *MapGameScene {
 
 	imgIconPopulation, _, err := ebitenutil.NewImageFromFile("data/image/populations.png")
