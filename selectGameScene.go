@@ -30,10 +30,11 @@ func (m *SelectGame) Update(g *Game) error {
 
 		if len(items) > 0 {
 			imgui.ListBoxV("Sauvegardes", &m.choice, items, 5)
-			if imgui.ButtonV("Retour", imgui.Vec2{ 100, 50 }) {
-				fmt.Println("Retour menu")
-				g.current_scene = &Menu{}
-			}
+		}
+
+		if imgui.ButtonV("Retour", imgui.Vec2{ 100, 50 }) {
+			fmt.Println("Retour menu")
+			g.current_scene = &Menu{}
 		}
 		imgui.SameLine()
 		if imgui.ButtonV("Nouvelle Partie", imgui.Vec2{ 150, 50 }) {
