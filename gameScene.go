@@ -30,15 +30,19 @@ type GameScene struct {
 	is_pause	bool
 	timer		float64
 	current_event	*Event
+	name	string
 	imgHall	*ebiten.Image
 	imgBgLeft	*ebiten.Image
 	imgBgRight	*ebiten.Image
 	imgBorderDate	*ebiten.Image
 }
 
-func LoadGame (s *State) *GameScene {
+func LoadGame (name string ,s *State) *GameScene {
 	scene := NewGame()
-	scene.game_state = s
+	scene.name = name
+	if (s != nil){
+		scene.game_state = s
+	}
 	return scene
 }
 
@@ -89,6 +93,7 @@ func NewGame () *GameScene {
 		false,
 		5 * ebiten.ActualTPS(),
 		nil,
+		"default",
 		imgHall,
 		imgBgLeft,
 		imgBgRight,
