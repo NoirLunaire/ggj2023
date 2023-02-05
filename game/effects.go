@@ -7,7 +7,7 @@ func BuildTower (s *State) {
 }
 
 func addEvents (s *State) {
-	s.EventPool = []int{ 4 }
+	s.EventPool = []int{ 15 }
 }
 
 func P1Hap (s *State) {
