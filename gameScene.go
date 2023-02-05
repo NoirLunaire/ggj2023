@@ -130,6 +130,11 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 }
 
 func (m *GameScene) Update(g *Game) error {
+	if EndGame(m.game_state) {
+		m.audioPlayer.Pause()
+		g.current_scene = &GameOver{ m.game_state }
+	}
+
 	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
 		g.current_scene = &PauseMenu{
 			m,
@@ -190,10 +195,8 @@ func (m *GameScene) Update(g *Game) error {
 		}
 		imgui.SameLine();
 		if imgui.ButtonV("MAP", imgui.Vec2{50, 50}) {
-			if !m.has_event {
-				m.is_pause = true
-				g.current_scene = NewGameMap(m)
-			}
+			m.is_pause = true
+			g.current_scene = NewGameMap(m)
 		}
 		imgui.End()
 	}
