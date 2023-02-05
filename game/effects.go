@@ -6,7 +6,7 @@ func Nothing (s *State) {}
 // H M P
 
 func addEvents (s *State) {
-	s.EventPool = []int{ 1, 2, 3, 4 }
+	s.EventPool = []int{ 4 }
 }
 
 func P1Hap (s *State) {
