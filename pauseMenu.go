@@ -41,7 +41,6 @@ func (m *PauseMenu) Update (g *Game) error {
 		imgui.SameLine();
 		if imgui.ButtonV("Settings", imgui.Vec2{ 200, 300 }) {
 			fmt.Println("Settings")
-			SaveGame("testing", m.gameData.game_state)
 			g.current_scene = NewSettings(m.gameData)
 		}
 		imgui.PopStyleColor()
@@ -50,7 +49,8 @@ func (m *PauseMenu) Update (g *Game) error {
 		setColor(1)
 		imgui.SameLine();
 		if imgui.ButtonV("Sauvegarder", imgui.Vec2{ 200, 300 }) {
-			SaveGame("testing", m.gameData.game_state)
+			fmt.Println("saving...")
+			SaveGame(m.gameData.name, m.gameData.game_state)
 		}
 		imgui.PopStyleColor()
 		imgui.PopStyleColor()

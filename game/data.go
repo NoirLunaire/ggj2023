@@ -72,21 +72,27 @@ func LoadEffects () map[int]func(s *State) {
 }
 
 func SaveGame (name string, s *State) {
+	save := ""
 	path := "save/" + name + ".sav"
 	f, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0644)
 	CheckError(err)
 	err = f.Truncate(0)
 	CheckError(err)
-	save := ""
-	save += strconv.Itoa(s.King_age) + ";"
-	save += s.Date.Format("02-01-2006") + ";"
-	save += strconv.Itoa(s.Happiness) + ";"
-	save += strconv.Itoa(s.Money) + ";"
-	save += strconv.Itoa(s.Population) + ";"
-	for i := 0; i < len(s.EventPool); i++ {
-		save += strconv.Itoa(s.EventPool[i]) + ";"
-	}
 
+	if (s == nil){
+		save = "15;1-01-1000;10;10;10;0;"
+	}else{
+		
+		save += strconv.Itoa(s.King_age) + ";"
+		save += s.Date.Format("02-01-2006") + ";"
+		save += strconv.Itoa(s.Happiness) + ";"
+		save += strconv.Itoa(s.Money) + ";"
+		save += strconv.Itoa(s.Population) + ";"
+		for i := 0; i < len(s.EventPool); i++ {
+			fmt.Println("saving ", s.EventPool[i])
+			save += strconv.Itoa(s.EventPool[i]) + ";"
+		}
+	}
 	_, err = f.WriteString(save)
 	if err != nil {
 		log.Fatal(err)
