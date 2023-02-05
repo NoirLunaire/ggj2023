@@ -13,6 +13,7 @@ import (
 	_ "image/png"
 
 	. "ggj2023/game"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/inkyblackness/imgui-go/v4"
 	"github.com/hajimehoshi/ebiten/v2/audio"
@@ -33,6 +34,12 @@ type GameScene struct {
 	imgBgLeft	*ebiten.Image
 	imgBgRight	*ebiten.Image
 	imgBorderDate	*ebiten.Image
+}
+
+func LoadGame (s *State) *GameScene {
+	scene := NewGame()
+	scene.game_state = s
+	return scene
 }
 
 func NewGame () *GameScene {
@@ -112,13 +119,19 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Scale(0.67, 0.562)
 	screen.DrawImage(m.imgHall, op)
 
-
 	DrawDate(screen,m)
 	DrawTPS(screen)
 	mgr.Draw(screen)
 }
 
 func (m *GameScene) Update(g *Game) error {
+	if inpututil.IsKeyJustPressed(ebiten.KeyEscape) {
+		g.current_scene = &PauseMenu{
+			m,
+			false,
+		}
+	}
+
 	if !m.audioPlayer.IsPlaying() {
 		m.audioPlayer.Play()
 	}
