@@ -24,7 +24,7 @@ func (m *PauseMenu) Update (g *Game) error {
 	bole := true
 	mgr.BeginFrame()
 	{
-		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 300, 720 / 2 - 150})
+		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 400, 720 / 2 - 150})
 		imgui.BeginV("Menu", &bole, gui_flags)
 		if m.saved {
 			imgui.Text("saved")
