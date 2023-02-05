@@ -55,4 +55,3 @@ func (m *Menu) Layout (outsideWidth, outsideHeight int) (int, int) {
 	mgr.SetDisplaySize(float32(1280), float32(720))
 	return 1280, 720
 }
-
