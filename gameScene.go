@@ -44,7 +44,7 @@ func LoadGame (s *State) *GameScene {
 
 func NewGame () *GameScene {
 	s, err := mp3.DecodeWithoutResampling(bytes.NewReader(music.Ost_mp3))
-	settings := NewSettings()
+	settings := NewSettings(nil)
 
 	if err != nil {
 		log.Fatal(err)
