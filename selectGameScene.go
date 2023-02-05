@@ -45,7 +45,7 @@ func (m *SelectGame) Update(g *Game) error {
 		if len(items) > 0 {
 			if imgui.ButtonV("Charger", imgui.Vec2{ 150, 50 }) {
 				fmt.Println("Chargement d'une partie")
-				s := LoadSave(items[m.choice])
+				s, _ := LoadSave(items[m.choice])
 				g.current_scene = LoadGame(s)
 			}
 		}

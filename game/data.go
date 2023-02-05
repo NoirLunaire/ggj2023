@@ -2,6 +2,7 @@ package game
 
 import (
 	"log"
+	"errors"
 	"strings"
 	"os"
 	"fmt"
@@ -36,7 +37,7 @@ func NewState () *State {
 		10,
 		10,
 		10,
-		[]int{ 1 },
+		[]int{ 0, 1, 2, 3 },
 		LoadEvents(),
 		LoadChoices(),
 		LoadEffects(),
@@ -45,10 +46,16 @@ func NewState () *State {
 
 func LoadEffects () map[int]func(s *State) {
 	m := make(map[int]func(s *State))
-	m[0] = LosePop
-	m[1] = LoseMoney
-	m[2] = WinHap
-	m[3] = HapForMoney
+	m[0] = Nothing
+	m[1] = Nothing
+	m[2] = P1Hap
+	m[3] = M2HapP1Mon
+	m[4] = M1HapP3Pop
+	m[5] = P1HapP1Pop
+	m[6] = M1HapP1Mon
+	m[7] = M1Hap
+	m[8] = M1Mon
+	m[9] = Nothing
 	return m
 }
 
@@ -75,16 +82,18 @@ func SaveGame (name string, s *State) {
 	}
 }
 
-func LoadSave (name string) *State  {
+func LoadSave (name string) (*State, error)  {
 	path := "save/" + name
 	f, err := os.Open(path)
-	CheckError(err)
+	if err != nil { return nil, err }
 	info, err := f.Stat()
-	CheckError(err)
+	if err != nil { return nil, err }
 	size := info.Size()
 	list := make([]byte, size)
 	_, err = f.Read(list)
-	CheckError(err)
+	if err != nil {
+		return nil, err
+	}
 
 	data := string(list)
 	tab := strings.Split(data, ";")
@@ -94,25 +103,38 @@ func LoadSave (name string) *State  {
 	fmt.Println(tab)
 	var state State
 	state.King_age, err = strconv.Atoi(tab[0])
-	CheckError(err)
+	if err != nil {
+		return nil, err
+	}
+
 	state.Date, err = time.Parse("02-01-2006", tab[1])
-	CheckError(err)
+	if err != nil {
+		return nil, err
+	}
+
 	state.Happiness, err = strconv.Atoi(tab[2])
-	CheckError(err)
+	if err != nil {
+		return nil, err
+	}
+
 	state.Money, err = strconv.Atoi(tab[3])
-	CheckError(err)
+
 	state.Population, err = strconv.Atoi(tab[4])
-	CheckError(err)
+	if err != nil {
+		return nil, err
+	}
 	for i := 5; i < len(tab) - 1; i++ {
 		j, err := strconv.Atoi(tab[i])
-		CheckError(err)
+		if err != nil {
+			return nil, errors.New("Invalid save")
+		}
 		state.EventPool = append(state.EventPool, j)
 	}
 
 	state.EventList = LoadEvents()
 	state.ChoiceList = LoadChoices()
 	state.Effects = LoadEffects()
-	return &state
+	return &state, nil
 }
 
 func GetSaves () []string {
