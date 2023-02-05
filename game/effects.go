@@ -8,7 +8,7 @@ func BuildTower (s *State) {
 }
 
 func addEvents (s *State) {
-	s.EventPool = []int{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 15 }
+	s.EventPool = []int{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }
 }
 
 func P1Hap (s *State) {
@@ -130,3 +130,30 @@ func M1HapP1MonM1Pop (s *State) {
 	s.Money += 1
 	s.Population -= 1
 }
+
+func M4Mon (s *State) {
+	s.Money -= 4
+}
+
+func M7HapM2Pop (s *State) {
+	s.Happiness -= 7
+	s.Population -= 2
+}
+
+func M14Mon (s *State) {
+	s.Money -= 14
+}
+
+func M2Hap (s *State) {
+	s.Happiness -= 2
+}
+
+func M1HapM2Pop (s *State) {
+	s.Happiness -= 1
+	s.Population -= 2
+}
+
+func M1Pop (s *State) {
+	s.Population -= 1
+}
+
