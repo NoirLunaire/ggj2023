@@ -73,7 +73,7 @@ func SaveGame (name string, s *State) {
 	CheckError(err)
 
 	if (s == nil){
-		save = "15;1-01-1000;10;10;10;0;"
+		save = "15;01-01-1000;10;10;10;0;"
 	}else{
 		
 		save += strconv.Itoa(s.King_age) + ";"
