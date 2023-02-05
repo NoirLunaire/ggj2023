@@ -5,7 +5,6 @@ import (
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/inkyblackness/imgui-go/v4"
 )
 
@@ -13,7 +12,7 @@ type SelectGame struct {}
 
 func (m *SelectGame) Draw (screen *ebiten.Image) {
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()))
+	DrawTPS(screen)
 	mgr.Draw(screen)
 }
 

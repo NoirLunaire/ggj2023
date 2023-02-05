@@ -1,24 +1,23 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"bytes"
 	"image/color"
 	"math/rand"
-	"strconv"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/v2/audio/mp3"
 	music "ggj2023/data/music"
+	_ "image/png"
 
 	. "ggj2023/game"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/inkyblackness/imgui-go/v4"
-	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hajimehoshi/ebiten/v2/audio"
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	
 )
 
 type GameScene struct {
@@ -30,6 +29,10 @@ type GameScene struct {
 	is_pause	bool
 	timer		float64
 	current_event	*Event
+	imgHall	*ebiten.Image
+	imgBgLeft	*ebiten.Image
+	imgBgRight	*ebiten.Image
+	imgBorderDate	*ebiten.Image
 }
 
 func NewGame () *GameScene {
@@ -60,6 +63,16 @@ func NewGame () *GameScene {
 	})
 	
 	player.Play()
+
+	imgHall, _, err := ebitenutil.NewImageFromFile("data/image/hall.png")
+	imgBgLeft, _, erre := ebitenutil.NewImageFromFile("data/image/backgroundLeft.png")
+	imgBgRight, _, errer := ebitenutil.NewImageFromFile("data/image/backgroundRight.png")
+	imgBorderDate, _, errero := ebitenutil.NewImageFromFile("data/image/dateBorder.png")
+	if err != nil  || erre != nil || errer != nil || errero != nil{
+		log.Fatalf("Failed to load image: %v", err)
+	}
+	
+
 	return &GameScene{
 		NewState(),
 		ourFont,
@@ -69,6 +82,10 @@ func NewGame () *GameScene {
 		false,
 		5 * ebiten.ActualTPS(),
 		nil,
+		imgHall,
+		imgBgLeft,
+		imgBgRight,
+		imgBorderDate,
 	}
 }
 
@@ -80,11 +97,35 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 		m.timer -= 1
 	}
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
+	
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(0, 0)
+	op.GeoM.Scale(0.67, 0.562)
+	screen.DrawImage(m.imgHall, op)
+	screen.DrawImage(m.imgBgLeft, op)
+	op.GeoM.Translate(640, 0)
+	screen.DrawImage(m.imgBgRight, op)
+	op.GeoM.Translate(-640, 0)
+	screen.DrawImage(m.imgHall, op)
+
+
+	DrawDate(screen,m)
+	DrawTPS(screen)
+	mgr.Draw(screen)
+}
+
+func (m *GameScene) Update(g *Game) error {
+	if !m.audioPlayer.IsPlaying() {
+		m.audioPlayer.Play()
+	}
+
+
 	mgr.Update(1.0/60.0)
 	bole := true
 	// draw event window
 	mgr.BeginFrame()
 	{
+		
 		if m.has_event {
 			imgui.SetNextWindowPos(imgui.Vec2{ 640, 360 })
 			imgui.BeginV(m.current_event.Title, &bole, imgui.WindowFlagsNoResize + imgui.WindowFlagsNoMove + imgui.WindowFlagsNoCollapse + imgui.WindowFlagsAlwaysAutoResize)
@@ -119,28 +160,17 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 		if imgui.ButtonV("Pause", imgui.Vec2{50, 50}) {
 			m.is_pause = !m.is_pause
 		}
+		imgui.SameLine();
+		imgui.SetNextWindowPos(imgui.Vec2{ 100, 100 })
+		if imgui.ButtonV("MAP", imgui.Vec2{50, 50}) {
+			m.is_pause = true
+			g.current_scene = NewGameMap(m)
+		}
 		imgui.End()
 	}
 	mgr.EndFrame()
 
-	// draw resources
-	text.Draw(screen, "Happiness : " + strconv.Itoa(m.game_state.Happiness), m.font, 30, 100, color.White)
-	text.Draw(screen, "Money : " + strconv.Itoa(m.game_state.Money), m.font, 30, 150, color.White)
-	text.Draw(screen, "Population : " + strconv.Itoa(m.game_state.Population), m.font, 30, 200, color.White)
-	if m.is_pause {
-		text.Draw(screen, m.game_state.Date.Format("02-01-2006"), m.font, 30, 250, color.White)
-	} else {
-		text.Draw(screen, m.game_state.Date.Format("02-01-2006"), m.font, 30, 250, color.White)
-	}
-	// draw tps
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()))
-	mgr.Draw(screen)
-}
 
-func (m *GameScene) Update(g *Game) error {
-	if !m.audioPlayer.IsPlaying() {
-		m.audioPlayer.Play()
-	}
 	return nil
 }
 

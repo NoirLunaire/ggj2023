@@ -2,7 +2,7 @@ package game
 
 import (
 	"encoding/csv"
-	"fmt"
+	"log"
 	"os"
 	"strconv"
 )
@@ -16,7 +16,7 @@ type Choice struct {
 func LoadChoices () []*Choice {
 	file, err := os.Open("data/dialog/choices.csv")
 	if err != nil {
-		fmt.Println("Error while trying opening csv file (choices.csv):", err)
+		log.Fatal(err)
 		return nil
 	}
 	defer file.Close()
@@ -24,16 +24,15 @@ func LoadChoices () []*Choice {
 	reader := csv.NewReader(file)
 	records, err := reader.ReadAll()
 	if err != nil {
-		fmt.Println("Error reading CSV (choices.csv):", err)
+		log.Fatal(err)
 		return nil
 	}	
 	
 	tab := []*Choice{}
-
 	for _, value := range records {
 		id, err := strconv.Atoi(value[0])
 			if err != nil {
-				fmt.Println("Error converting string to int:", err)
+				log.Fatal(err)
 				return nil
 			}
 		

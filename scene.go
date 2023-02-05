@@ -1,7 +1,12 @@
 package main
 
 import (
+	"fmt"
+	"image/color"
+
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/inkyblackness/imgui-go/v4"
+	"github.com/hajimehoshi/ebiten/v2/text"
 	"github.com/hajimehoshi/ebiten/v2"
 )
 
@@ -18,7 +23,21 @@ func ImguiStyle () {
 	imgui.PushStyleColor(11, imgui.Vec4{ 0.7, 0, 0, 1.0 })
 }
 
+func DrawTPS(screen *ebiten.Image) {
+	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()))
+}
 
+func DrawDate(screen *ebiten.Image, m *GameScene) {
+	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(2909, 1)
+	op.GeoM.Scale(0.3, 0.3)
+	screen.DrawImage(m.imgBorderDate, op)
+	if m.is_pause {
+		text.Draw(screen, m.game_state.Date.Format("2 January, 2006"), m.font, 940, 55, color.RGBA{R: 0x00, G: 0x80, B: 0xff, A: 0xff})
+	} else {
+		text.Draw(screen, m.game_state.Date.Format("2 January, 2006"), m	.font, 940, 55, color.White)
+	}	
+}
 
 func setColor(a int) {
 	r := float32(0.0)
@@ -41,5 +60,4 @@ func setColor(a int) {
 	}
 	imgui.PushStyleColor(21, imgui.Vec4{ r,g,b, 1.0 })
 	imgui.PushStyleColor(0, imgui.Vec4{ 0, 0, 0, 1.0 })
-	
 }
