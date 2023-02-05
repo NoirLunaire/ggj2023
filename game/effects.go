@@ -19,4 +19,8 @@ func WinHap (s *State) {
 func HapForMoney (s *State) {
 	s.Happiness -= 2
 	s.Money += 1
+}
+
+func Bienvenue (s *State) {
+	s.Happiness -= 1
 } 
