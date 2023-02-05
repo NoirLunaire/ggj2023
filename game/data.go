@@ -92,6 +92,7 @@ func SaveGame (name string, s *State) {
 		save += strconv.Itoa(s.Happiness) + ";"
 		save += strconv.Itoa(s.Money) + ";"
 		save += strconv.Itoa(s.Population) + ";"
+		save += strconv.Itoa(s.Tower) + ";"
 		for i := 0; i < len(s.EventPool); i++ {
 			fmt.Println("saving ", s.EventPool[i])
 			save += strconv.Itoa(s.EventPool[i]) + ";"
@@ -118,7 +119,7 @@ func LoadSave (name string) (*State, error)  {
 
 	data := string(list)
 	tab := strings.Split(data, ";")
-	if len(tab) <= 5 {
+	if len(tab) <= 6 {
 		return nil, errors.New("Incorrect file")
 	}
 	fmt.Println(tab)
@@ -141,6 +142,11 @@ func LoadSave (name string) (*State, error)  {
 	state.Money, err = strconv.Atoi(tab[3])
 
 	state.Population, err = strconv.Atoi(tab[4])
+	if err != nil {
+		return nil, err
+	}
+
+	state.Tower, err = strconv.Atoi(tab[5])
 	if err != nil {
 		return nil, err
 	}

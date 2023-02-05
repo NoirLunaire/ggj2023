@@ -3,6 +3,7 @@ package game
 func Nothing (s *State) {}
 
 func BuildTower (s *State) {
+	s.Money -= 4
 	s.Tower = 1
 }
 
