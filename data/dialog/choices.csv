@@ -2,3 +2,37 @@
 1,Je me couronne moi même,this is the second choice
 2,Punissez les bûcherons,+1 bonheur
 3,On a besoin de bois laissez les,-2 bonheur et +1 money
+4,Vous êtes les bienvennus,-1 bonheur et +3 pop
+5,Je peux vous rediriger vers un village avoisinent;+1 bonheur et +1 pop
+6,Je ne peux vous accepter,-1 bonheur et +1 money
+7,Ce ne sont pas mes affaires,-1 bonheur
+8,Tenez voilà une pièce,-1 money
+9,Tenez soigner votre femme,-2 money et +1 bonheur
+10,Vous avez un problème avec l'alcool ?, Poser la question
+11,Dégager de ma cour,-1 bonheur
+12,Je me sens d'humeur charitable,-1 money et +1 bonheur
+13,Foutez le camp!,-1 bonheur
+14,Tennez reprenis votre vie en main, -5 money et une promesse
+15,C'était mon devoir de roi, +10 money +4 bonheur +3 pop et une taverne
+16,Je ne peut vous aider pour le moment,-3 bonheur et -6 pop
+17,Chassez la vous-même,-6 bonheur et -3 pop
+18,J'y envoie des hommes sur le champ!, -7 money et +4 bonheur
+19,Je peut vous bénir pour contrecarré les plan de la sorcière!, +2 bonheur et -4 pop
+20,Je n'est pas besoin de votre argent,
+21,Je veux bien signer un petit prêt, +25 money
+22,Pour votre roi donner moi tout ce que vous posséder, +50 money
+23,Tenez..., -50 money
+24,Je suis votre roi ! Je n'ai pas à vous rendre compte !, -20 bonheur
+25,Abandonner les mines et reconvertisser vous, -7 money et +1 bonheur et +3 pop
+26,Tenter de nouvelles pratiques, +1 money et -2 bonheur et -4 pop
+27,Fermer les nous allons et établir de nouvelles, -4 money et +2 bonheur et +1 pop
+28,Carasser le corbeau, +1 bonheur et un corbeau
+29,Allez ! Ouste !, +1 money
+30,Foutez le camp d'ici!, +1 money et -1 bonheur et -1 pop
+31,Ce n'est pas grave..., -4 money
+32,Il devrait être heureux de me servir, -7 bonheur -2 pop
+33,Tenez donner leur cet argent, -14 money
+34,Débraillez vous avec vos problème, -2 bonheur
+35,Faites les disparaître tous les 2, -1 bonheur et -2 pop
+36,Nier toutes responsabilité, -1 bonheur
+37,Foutez le camp de ma cours, -1 pop
