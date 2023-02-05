@@ -113,7 +113,12 @@ func (m *SettingsScene) Update(g *Game) error {
 			}
 
 			fmt.Println("Write successful")
-			applySettings()
+			
+			if (m.gameData != nil){
+				applySettings(m.gameData)
+			}else{
+				applySettings(nil)
+			}	
 			
 		}
 		//fmt.Println("Effects Volume :",&m.effectsVolume)
