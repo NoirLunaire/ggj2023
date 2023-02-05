@@ -4,7 +4,6 @@ import (
 	"log"
 	"bytes"
 	"image/color"
-	"math/rand"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
 	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
@@ -140,7 +139,7 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 
 func (m *GameScene) Update(g *Game) error {
 	if EndGame(m.game_state) {
-		m.audioPlayer.Pause()
+		m.audioPlayer.Close()
 		g.current_scene = &GameOver{ m.game_state }
 	}
 
@@ -188,7 +187,7 @@ func (m *GameScene) Update(g *Game) error {
 
 		if m.timer <= 0 {
 			if len(m.game_state.EventPool) > 0 && m.current_event == nil {
-				r := rand.Intn(len(m.game_state.EventPool))
+				r := random.Intn(len(m.game_state.EventPool))
 				m.current_event = m.game_state.EventList[m.game_state.EventPool[r]]
 				m.has_event = true
 				m.is_pause = true
