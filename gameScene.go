@@ -53,7 +53,6 @@ func NewGame () *GameScene {
 	if err != nil {
 		log.Fatal(err)
 	}
-	context := audio.NewContext(44100)
 	loop := audio.NewInfiniteLoop(s, s.Length() - 1)
 	player, err := context.NewPlayer(loop)
 	if err != nil {
@@ -154,7 +153,7 @@ func (m *GameScene) Update(g *Game) error {
 	{
 		
 		if m.has_event {
-			imgui.SetNextWindowPos(imgui.Vec2{ 640, 360 })
+			imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 300, 720 / 2 })
 			imgui.BeginV(m.current_event.Title, &bole, imgui.WindowFlagsNoResize + imgui.WindowFlagsNoMove + imgui.WindowFlagsNoCollapse + imgui.WindowFlagsAlwaysAutoResize)
 			imgui.Text(m.current_event.Description)
 			for i := 0; i < len(m.current_event.Choices); i++ {
