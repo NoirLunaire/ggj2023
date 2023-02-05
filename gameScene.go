@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"bytes"
 	"image/color"
@@ -99,7 +98,7 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	}
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
 	
-	x, y := ebiten.CursorPosition()
+	x, _ := ebiten.CursorPosition()
 	diff := (x - 1280/2)/16
 
 	op := &ebiten.DrawImageOptions{}
