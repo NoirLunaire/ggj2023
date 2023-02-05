@@ -155,10 +155,14 @@ func (m *GameScene) Update(g *Game) error {
 			for i := 0; i < len(m.current_event.Choices); i++ {
 				if imgui.Button( m.game_state.ChoiceList[m.current_event.Choices[i]].Title ) {
 					m.game_state.Effects[m.current_event.Choices[i]](m.game_state)
-					m.has_event = false
-					m.timer = ebiten.ActualTPS() * 6
-					m.current_event = nil
-					m.is_pause = false
+					if m.current_event.Choices[i] == 10 {
+						m.current_event = m.game_state.EventList[5]
+					} else {
+						m.has_event = false
+						m.timer = ebiten.ActualTPS() * 6
+						m.current_event = nil
+						m.is_pause = false
+					}
 					break
 				}
 				if imgui.IsItemHovered() {

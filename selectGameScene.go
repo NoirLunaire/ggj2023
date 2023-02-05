@@ -11,6 +11,7 @@ import (
 
 type SelectGame struct {
 	choice	int32
+	loaded	error
 	saveText string
 }
 
@@ -26,6 +27,13 @@ func (m *SelectGame) Update(g *Game) error {
 	items := GetSaves()
 	mgr.BeginFrame()
 	{
+		if m.loaded != nil {
+			imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 100, 100 })
+			imgui.BeginV("Error", &bole, gui_flags)
+			imgui.Text("Erreur lors du chargement de la sauvegarde")
+			imgui.End()
+		}
+
 		imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 150, 720 / 2 - 150})
 		imgui.BeginV("SelectGame", &bole, gui_flags)
 
@@ -42,8 +50,10 @@ func (m *SelectGame) Update(g *Game) error {
 		if len(items) > 0 {
 			if imgui.ButtonV("Charger", imgui.Vec2{ 150, 50 }) {
 				fmt.Println("Chargement d'une partie")
-				s, _ := LoadSave(items[m.choice])
-				g.current_scene = LoadGame(items[m.choice],s)
+				s, err := LoadSave(items[m.choice])
+				if err == nil {
+					g.current_scene = LoadGame(items[m.choice],s)
+				} else { m.loaded = err }
 			}
 		}
 

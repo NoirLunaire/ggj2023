@@ -37,7 +37,7 @@ func NewState () *State {
 		10,
 		10,
 		10,
-		[]int{ 0, 1, 2, 3 },
+		[]int{ 0 },
 		LoadEvents(),
 		LoadChoices(),
 		LoadEffects(),
@@ -46,8 +46,8 @@ func NewState () *State {
 
 func LoadEffects () map[int]func(s *State) {
 	m := make(map[int]func(s *State))
-	m[0] = Nothing
-	m[1] = Nothing
+	m[0] = addEvents
+	m[1] = addEvents
 	m[2] = P1Hap
 	m[3] = M2HapP1Mon
 	m[4] = M1HapP3Pop
@@ -55,7 +55,12 @@ func LoadEffects () map[int]func(s *State) {
 	m[6] = M1HapP1Mon
 	m[7] = M1Hap
 	m[8] = M1Mon
-	m[9] = Nothing
+	m[9] = P1HapM2Mon
+	m[10] = Nothing
+	m[11] = M1Hap
+	m[12] = P1HapM1Mon
+	m[13] = M1Hap
+	m[14] = M5Mon
 	return m
 }
 
@@ -103,7 +108,7 @@ func LoadSave (name string) (*State, error)  {
 	data := string(list)
 	tab := strings.Split(data, ";")
 	if len(tab) <= 5 {
-		log.Fatal("Corrupted file")
+		return nil, errors.New("Incorrect file")
 	}
 	fmt.Println(tab)
 	var state State

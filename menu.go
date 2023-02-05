@@ -26,7 +26,7 @@ func (m *Menu) Update(g *Game) error {
 		setColor(0);
 		if imgui.ButtonV("Jouer", imgui.Vec2{ 200, 300 }) {
 			fmt.Println("Jouer :)")
-			g.current_scene = &SelectGame{ }
+			g.current_scene = &SelectGame{ 0, nil, "default"}
 		}
 		imgui.PopStyleColor()
 		imgui.PopStyleColor()
