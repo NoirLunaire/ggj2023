@@ -36,6 +36,17 @@ func (m *PauseMenu) Update (g *Game) error {
 		}
 		imgui.PopStyleColor()
 		imgui.PopStyleColor()
+
+		setColor(1)
+		imgui.SameLine();
+		if imgui.ButtonV("Settings", imgui.Vec2{ 200, 300 }) {
+			fmt.Println("Settings")
+			SaveGame("testing", m.gameData.game_state)
+			g.current_scene = NewSettings(m.gameData)
+		}
+		imgui.PopStyleColor()
+		imgui.PopStyleColor()
+
 		setColor(1)
 		imgui.SameLine();
 		if imgui.ButtonV("Sauvegarder", imgui.Vec2{ 200, 300 }) {
@@ -44,6 +55,7 @@ func (m *PauseMenu) Update (g *Game) error {
 		}
 		imgui.PopStyleColor()
 		imgui.PopStyleColor()
+		
 		setColor(2)
 		imgui.SameLine();
 		if imgui.ButtonV("Quitter", imgui.Vec2{ 200, 300 }) {

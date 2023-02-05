@@ -16,9 +16,10 @@ type SettingsScene struct {
 	fullscreen		bool
 	musicVolume		float32
 	effectsVolume	float32
+	gameData	*GameScene
 }
 
-func NewSettings () *SettingsScene {
+func NewSettings (m *GameScene) *SettingsScene {
 	file, err := os.Open("./config/settings.txt")
 	if err != nil {
 		log.Fatalf("Error opening files (settings.txt): %v", err)
@@ -51,10 +52,12 @@ func NewSettings () *SettingsScene {
 		log.Fatalf("Error while trying to parse (settings.Txt) file: %v", err)
 		return nil
 	}
+	gameData := m
 	return &SettingsScene{
 		fullscreenn,
 		float32(musicVolume),
 		float32(musicEffects),
+		gameData,
 	}
 }
 
@@ -79,7 +82,11 @@ func (m *SettingsScene) Update(g *Game) error {
 		imgui.SliderFloat("Effects Volume", &m.effectsVolume, 0, 1)
 		if imgui.ButtonV("Retour", imgui.Vec2{ 100, 50 }) {
 			fmt.Println("Retour menu")
-			g.current_scene = &Menu{}
+			if (m.gameData != nil){
+				g.current_scene = m.gameData
+			}else{
+				g.current_scene = &Menu{}
+			}	
 		}
 		imgui.SameLine();
 		if imgui.ButtonV("Appliquer changements", imgui.Vec2{ 200, 50 }) {

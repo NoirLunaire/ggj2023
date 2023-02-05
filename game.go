@@ -21,7 +21,7 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 }
 
 func applySettings() {
-	setting := NewSettings()
+	setting := NewSettings(nil)
 	
 	ebiten.SetFullscreen(setting.fullscreen);
 
