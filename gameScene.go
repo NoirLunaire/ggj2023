@@ -164,7 +164,7 @@ func (m *GameScene) Update(g *Game) error {
 		}
 
 		if m.timer <= 0 {
-			if len(m.game_state.EventPool) > 0 {
+			if len(m.game_state.EventPool) > 0 && m.current_event == nil {
 				r := rand.Intn(len(m.game_state.EventPool))
 				m.current_event = m.game_state.EventList[m.game_state.EventPool[r]]
 				m.has_event = true
@@ -175,13 +175,16 @@ func (m *GameScene) Update(g *Game) error {
 		imgui.SetNextWindowPos(imgui.Vec2{ 1000, 650 })
 		imgui.BeginV("next", &bole, gui_flags)
 		if imgui.ButtonV("Pause", imgui.Vec2{50, 50}) {
-			m.is_pause = !m.is_pause
+			if !m.has_event {
+				m.is_pause = !m.is_pause
+			}
 		}
 		imgui.SameLine();
-		imgui.SetNextWindowPos(imgui.Vec2{ 100, 100 })
 		if imgui.ButtonV("MAP", imgui.Vec2{50, 50}) {
-			m.is_pause = true
-			g.current_scene = NewGameMap(m)
+			if !m.has_event {
+				m.is_pause = true
+				g.current_scene = NewGameMap(m)
+			}
 		}
 		imgui.End()
 	}
