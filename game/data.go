@@ -84,7 +84,7 @@ func SaveGame (name string, s *State) {
 	CheckError(err)
 
 	if (s == nil){
-		save = "15;1-01-1000;10;10;10;0;"
+		save = "15;01-01-1000;10;10;10;0;"
 	}else{
 		
 		save += strconv.Itoa(s.King_age) + ";"
@@ -176,5 +176,14 @@ func GetSaves () []string {
 		saves = append(saves, c[i].Name())
 	}
 	return saves
+}
+
+func RemoveSaves (fileName string){
+	err := os.Remove("save/" + fileName)
+	if err != nil {
+		log.Fatalf("Failed to removes file :", err)
+		return 
+	}
+	fmt.Println("File removed successfully :",fileName)
 }
 

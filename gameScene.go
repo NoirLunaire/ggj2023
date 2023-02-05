@@ -35,6 +35,7 @@ type GameScene struct {
 	imgBgLeft	*ebiten.Image
 	imgBgRight	*ebiten.Image
 	imgBorderDate	*ebiten.Image
+	imgTower	*ebiten.Image
 }
 
 func LoadGame (name string ,s *State) *GameScene {
@@ -78,7 +79,8 @@ func NewGame () *GameScene {
 	imgBgLeft, _, erre := ebitenutil.NewImageFromFile("data/image/backgroundLeft.png")
 	imgBgRight, _, errer := ebitenutil.NewImageFromFile("data/image/backgroundRight.png")
 	imgBorderDate, _, errero := ebitenutil.NewImageFromFile("data/image/dateBorder.png")
-	if err != nil  || erre != nil || errer != nil || errero != nil{
+	imgTower, _, erreror := ebitenutil.NewImageFromFile("data/image/tower1.png")
+	if err != nil  || erre != nil || errer != nil || errero != nil || erreror != nil{
 		log.Fatalf("Failed to load image: %v", err)
 	}
 	
@@ -97,6 +99,7 @@ func NewGame () *GameScene {
 		imgBgLeft,
 		imgBgRight,
 		imgBorderDate,
+		imgTower,
 	}
 }
 
@@ -119,13 +122,12 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Translate(740 - float64(diff), 0)
 	screen.DrawImage(m.imgBgRight, op)
 
-	if m.game_state.Tower == 1 {
-		op = &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(0, 0)
-		op.GeoM.Scale(1, 1)
-		screen.DrawImage(m.builtTower, op)
+	op.GeoM.Translate(550 - float64(diff), 200)
+	if (m.game_state.Tower == 1){
+		screen.DrawImage(m.imgTower,op)
 	}
-
+	
+	
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(0, 0)
 	op.GeoM.Scale(0.67, 0.562)

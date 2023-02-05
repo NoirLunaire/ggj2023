@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"image/color"
+	"strings"
 
 	. "ggj2023/game"
 	"github.com/hajimehoshi/ebiten/v2"
@@ -52,8 +53,16 @@ func (m *SelectGame) Update(g *Game) error {
 				fmt.Println("Chargement d'une partie")
 				s, err := LoadSave(items[m.choice])
 				if err == nil {
-					g.current_scene = LoadGame(items[m.choice],s)
+					str := items[m.choice]
+					str = strings.TrimSuffix(str, ".sav")
+
+					g.current_scene = LoadGame(str,s)
 				} else { m.loaded = err }
+			}
+
+			if imgui.ButtonV("Supprimer", imgui.Vec2{ 150, 50 }) {
+				fmt.Println("Supprime Partie")
+				RemoveSaves(items[m.choice]);
 			}
 		}
 
