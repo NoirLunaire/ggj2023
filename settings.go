@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"image/color"
 	"bufio"
 	"os"
 	"strconv"
 
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/inkyblackness/imgui-go/v4"
 )
 
@@ -21,7 +21,7 @@ type SettingsScene struct {
 func NewSettings () *SettingsScene {
 	file, err := os.Open("./config/settings.txt")
 	if err != nil {
-		fmt.Println("Error opening file:", err)
+		log.Fatalf("Error opening files (settings.txt): %v", err)
 		return nil
 	}
 	defer file.Close()
@@ -40,7 +40,7 @@ func NewSettings () *SettingsScene {
 
 	// Check for any errors that may have occurred during scanning
 	if err := scanner.Err(); err != nil {
-		fmt.Println("Error reading file:", err)
+		log.Fatalf("Error reading files (settings.txt): %v", err)
 		return nil
 	}
 
@@ -48,7 +48,7 @@ func NewSettings () *SettingsScene {
 	musicVolume, erre := strconv.ParseFloat(lines[1], 32)
 	musicEffects, err := strconv.ParseFloat(lines[2], 32)
 	if erre != nil || err != nil || errer != nil{
-		fmt.Println("Error while trying to parse settings.Txt file")
+		log.Fatalf("Error while trying to parse (settings.Txt) file: %v", err)
 		return nil
 	}
 	return &SettingsScene{
@@ -60,7 +60,7 @@ func NewSettings () *SettingsScene {
 
 func (m *SettingsScene) Draw (screen *ebiten.Image) {
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
-	ebitenutil.DebugPrint(screen, fmt.Sprintf("TPS: %.2f", ebiten.CurrentTPS()))
+	DrawTPS(screen)
 	mgr.Draw(screen)
 }
 
@@ -88,7 +88,7 @@ func (m *SettingsScene) Update(g *Game) error {
 			
 			file, err := os.OpenFile("./config/settings.txt", os.O_CREATE|os.O_WRONLY, 0644)
 			if err != nil {
-				fmt.Println("Error opening config file settings.txt:", err)
+				log.Fatalf("Error opening config file (settings.txt) : %v", err)
 				return nil
 			}
 			defer file.Close()
@@ -101,7 +101,7 @@ func (m *SettingsScene) Update(g *Game) error {
 			_, erre := file.WriteString((strconv.FormatFloat(float64(m.musicVolume), 'f', 2, 32)+"\n"))
 			_, errer := file.WriteString(strconv.FormatFloat(float64(m.effectsVolume), 'f', 2, 32))
 			if err != nil || erre != nil || errer != nil{
-				fmt.Println("Error writing to file settings.txt")
+				log.Fatalf("Error writing to file (settings.txt) : %v", err)
 				return nil
 			}
 

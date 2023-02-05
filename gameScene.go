@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"bytes"
 	"image/color"
@@ -105,14 +106,18 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	}
 	screen.Fill(color.RGBA{ 0, 0, 0, 0xff })
 	
+	x, y := ebiten.CursorPosition()
+	diff := (x - 1280/2)/16
+
 	op := &ebiten.DrawImageOptions{}
+	op.GeoM.Translate(-100 - float64(diff), 0)
+	op.GeoM.Scale(0.80, 0.562)
+	screen.DrawImage(m.imgBgLeft, op)
+	op.GeoM.Translate(740 - float64(diff), 0)
+	screen.DrawImage(m.imgBgRight, op)
+	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(0, 0)
 	op.GeoM.Scale(0.67, 0.562)
-	screen.DrawImage(m.imgHall, op)
-	screen.DrawImage(m.imgBgLeft, op)
-	op.GeoM.Translate(640, 0)
-	screen.DrawImage(m.imgBgRight, op)
-	op.GeoM.Translate(-640, 0)
 	screen.DrawImage(m.imgHall, op)
 
 	DrawDate(screen,m)
