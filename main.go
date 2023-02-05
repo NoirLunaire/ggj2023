@@ -6,7 +6,7 @@ import (
 
 func main() {
 	ebiten.SetWindowSize(1280, 720) 
-	applySettings()
+	applySettings(nil)
 
 	ImguiStyle()
 	g := &Game{

@@ -20,10 +20,11 @@ func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
 	return g.current_scene.Layout(1280, 720)
 }
 
-func applySettings() {
+func applySettings(m *GameScene) {
 	setting := NewSettings(nil)
 	
 	ebiten.SetFullscreen(setting.fullscreen);
-
-	//set sound volume
+	if (m != nil){
+		m.audioPlayer.SetVolume(float64(setting.musicVolume))
+	}
 }
