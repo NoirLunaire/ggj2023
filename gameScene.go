@@ -174,7 +174,7 @@ func (m *GameScene) Update(g *Game) error {
 						m.current_event = m.game_state.EventList[5]
 					} else {
 						m.has_event = false
-						m.timer = ebiten.ActualTPS() * (random.Intn(5) + 5)
+						m.timer = ebiten.ActualTPS() * float64(random.Intn(5) + 5)
 						m.current_event = nil
 						m.is_pause = false
 					}
