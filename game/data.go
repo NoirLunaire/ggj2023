@@ -117,7 +117,6 @@ func SaveGame (name string, s *State) {
 		save += strconv.Itoa(s.Population) + ";"
 		//save += strconv.Itoa(s.Tower) + ";"
 		for i := 0; i < len(s.EventPool); i++ {
-			fmt.Println("saving ", s.EventPool[i])
 			save += strconv.Itoa(s.EventPool[i]) + ";"
 		}
 	}
