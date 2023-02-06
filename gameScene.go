@@ -32,9 +32,11 @@ type GameScene struct {
 	current_event	*Event
 	name	string
 	imgHall	*ebiten.Image
+
 	imgBgLeft	*ebiten.Image
 	imgBgRight	*ebiten.Image
 	imgBorderDate	*ebiten.Image
+	
 	imgTower	*ebiten.Image
 }
 
@@ -115,6 +117,7 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	x, _ := ebiten.CursorPosition()
 	diff := (x - 1280/2)/16
 
+
 	op := &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(-100 - float64(diff), 0)
 	op.GeoM.Scale(0.80, 0.562)
@@ -122,12 +125,16 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Translate(740 - float64(diff), 0)
 	screen.DrawImage(m.imgBgRight, op)
 
-	op.GeoM.Translate(550 - float64(diff), 200)
-	if (m.game_state.Tower == 1){
+	
+	
+	
+	for i := 0 ; i < len( m.game_state.Village.TabBuild);i++ {
+		op = &ebiten.DrawImageOptions{}
+		op.GeoM.Scale(0.50, 0.50)
+		op.GeoM.Translate(m.game_state.Village.TabPositionBuild[i][0] - float64(diff), m.game_state.Village.TabPositionBuild[i][1])
 		screen.DrawImage(m.imgTower,op)
 	}
-	
-	
+
 	op = &ebiten.DrawImageOptions{}
 	op.GeoM.Translate(0, 0)
 	op.GeoM.Scale(0.67, 0.562)

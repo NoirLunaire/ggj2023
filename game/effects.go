@@ -4,7 +4,7 @@ func Nothing (s *State) {}
 
 func BuildTower (s *State) {
 	s.Money -= 4
-	s.Tower = 1
+	s.Village.TabBuild = append(s.Village.TabBuild,[2]int{Tower,1})
 }
 
 func addEvents (s *State) {

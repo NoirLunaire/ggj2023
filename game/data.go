@@ -25,7 +25,7 @@ type State struct {
 	Population	int
 	EventPool	[]int
 
-	Tower		int
+	Village		*Village
 	EventList	[]*Event
 	ChoiceList	[]*Choice
 	Effects		map[int]func(s *State)
@@ -46,7 +46,7 @@ func NewState () *State {
 		5,
 		5,
 		[]int{ 0 },
-		-1,
+		NewVillage(),
 		LoadEvents(),
 		LoadChoices(),
 		LoadEffects(),
@@ -115,7 +115,7 @@ func SaveGame (name string, s *State) {
 		save += strconv.Itoa(s.Happiness) + ";"
 		save += strconv.Itoa(s.Money) + ";"
 		save += strconv.Itoa(s.Population) + ";"
-		save += strconv.Itoa(s.Tower) + ";"
+		//save += strconv.Itoa(s.Tower) + ";"
 		for i := 0; i < len(s.EventPool); i++ {
 			fmt.Println("saving ", s.EventPool[i])
 			save += strconv.Itoa(s.EventPool[i]) + ";"
@@ -169,7 +169,7 @@ func LoadSave (name string) (*State, error)  {
 		return nil, err
 	}
 
-	state.Tower, err = strconv.Atoi(tab[5])
+	//state.Tower, err = strconv.Atoi(tab[5])
 	if err != nil {
 		return nil, err
 	}
