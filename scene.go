@@ -35,7 +35,7 @@ func DrawDate(screen *ebiten.Image, m *GameScene) {
 	if m.is_pause {
 		text.Draw(screen, m.game_state.Date.Format("2 January, 2006"), m.font, 940, 55, color.RGBA{R: 0x00, G: 0x80, B: 0xff, A: 0xff})
 	} else {
-		text.Draw(screen, m.game_state.Date.Format("2 January, 2006"), m	.font, 940, 55, color.White)
+		text.Draw(screen, m.game_state.Date.Format("2 January, 2006"), m.font, 940, 55, color.White)
 	}	
 }
 

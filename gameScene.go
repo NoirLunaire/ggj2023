@@ -157,11 +157,6 @@ func (m *GameScene) Update(g *Game) error {
 		}
 	}
 
-	if !m.audioPlayer.IsPlaying() {
-		m.audioPlayer.Play()
-	}
-
-
 	mgr.Update(1.0/60.0)
 	bole := true
 	// draw event window
