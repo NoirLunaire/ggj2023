@@ -30,23 +30,24 @@ func NewVillage () *Village {
 	TabPositionBuild = append(TabPositionBuild,[4]float64{1100, 350, 0.50,0.50})
 	TabPositionBuild = append(TabPositionBuild,[4]float64{1250,400, 0.50,0.50})
 	TabPositionBuild = append(TabPositionBuild,[4]float64{900,200, 0.25,0.25})
-	TabPositionBuild = append(TabPositionBuild,[4]float64{0,400, 0.50,0.50})
 	TabPositionBuild = append(TabPositionBuild,[4]float64{50,300, 0.50,0.50})
 	TabPositionBuild = append(TabPositionBuild,[4]float64{-50,400, 0.50,0.50})
 	TabPositionBuild = append(TabPositionBuild,[4]float64{300,200, 0.25,0.25})
 	shuffle(TabPositionBuild) 
 	
-	imgTower0, _, err := ebitenutil.NewImageFromFile("data/image/tower0.png")
-	imgTower1, _, erre := ebitenutil.NewImageFromFile("data/image/tower1.png")
-	imgTower2, _, errer := ebitenutil.NewImageFromFile("data/image/tower2.png")
-	imgHouse1, _, errere := ebitenutil.NewImageFromFile("data/image/House1.png")
-	if err != nil || erre != nil || errer != nil || errere != nil{
-		log.Fatalf("Failed to village build load image: %v", err)
+	imgTower0, _, err := ebitenutil.NewImageFromFile("data/image/building/tower0.png")
+	imgTower1, _, erre := ebitenutil.NewImageFromFile("data/image/building/tower1.png")
+	imgTower2, _, errer := ebitenutil.NewImageFromFile("data/image/building/tower2.png")
+	imgHouse1, _, errere := ebitenutil.NewImageFromFile("data/image/building/house1.png")
+	imgTavern1, _, errerer := ebitenutil.NewImageFromFile("data/image/building/tavern1.png")
+	if err != nil || erre != nil || errer != nil || errere != nil || errerer != nil{
+		log.Fatalf("Failed to village build load image: ")
 	}
 
 	TabImg := make([][]*ebiten.Image, 3)
 	TabImg[0] = []*ebiten.Image{imgTower0, imgTower1, imgTower2}
 	TabImg[1] = []*ebiten.Image{nil, imgHouse1, nil}
+	TabImg[2] = []*ebiten.Image{nil, imgTavern1, nil}
 	
 	return &Village{
 		[][2]int{},
@@ -65,6 +66,6 @@ func shuffle(data [][4]float64) [][4]float64 {
 	return data
 }
 
-func ChooseBuildImg(villa *Village, build [2]int) *ebiten.Image {
+func (villa *Village) ChooseBuildImg(build [2]int) *ebiten.Image {
 	return villa.TabImg[build[0]][build[1]]
 }

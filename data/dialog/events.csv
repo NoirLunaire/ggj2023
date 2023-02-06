@@ -1,4 +1,4 @@
-0;Couronnement;Cérémonie au cours de laquelle on couronne le Roi des Francs;0;1
+0;Couronnement;Cérémonie au cours de laquelle on couronne le Roi des Francs;0
 1;Bâtiments;Les bucherons du village veulent couper les arbres sur lequel les enfants jouent...;2;3
 2;Serf;Messire ! Mon village a été piller et dévaster par des bandits,\nNous venons vous demander clémence votre grâce et de nous laisser habiter en ville quelque temps...;4;5;6
 3;Serf;Votre grâce, le maladie à frapper ma femme cette hiver...\nJe n'ai pas les moyens de payer les soins...\nPouver vous me céder quelque pièces ?;7;8;9
@@ -14,4 +14,4 @@
 13;Général;Mon seigneur la garde et les hommes attende leur paye!;32;33
 14;Bourgeois;Mon roi ! J'ai un problème pour le moins personnel...\nj'ai quelque peut friquoter avec une cousinne éloigner...\nje ne pensais pas qu'un batard naîtrais de cette soirée pour le moins plaisante... Vous êtes roi, vous devez savoir que faire pour ne pas perdre toute crédibilité...;34;35;36;37
 15;Défense;Mon roi, les vikings ont attaqués le village voisin..\nen tant que capitaine de votre garde je vous conseil la construction d'une tour;38;39
-16;Maison;Mon roi, les nouvelles populations arrivés ont créé une grosse demande en logement mais nous n'en avons pas assez ! Un peu d'aide financière serait la bienvenue.;40;41
+16;Maison;Mon roi,\n\nles nouvelles populations arrivés ont créé une grosse demande en logement mais nous n'en avons pas assez !\nUn peu d'aide financière serait la bienvenue.;40;41

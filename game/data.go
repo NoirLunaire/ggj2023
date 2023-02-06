@@ -41,7 +41,7 @@ func EndGame (s *State) bool {
 func NewState () *State {
 	return &State{
 		15,
-		time.Date(1000, time.January, 1, 12, 0, 0, 0, time.UTC),
+		time.Date(481, time.January, 1, 12, 0, 0, 0, time.UTC),
 		100,
 		100,
 		100,

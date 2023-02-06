@@ -126,7 +126,7 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 		op.GeoM.Scale(m.game_state.Village.TabPositionBuild[i][2], m.game_state.Village.TabPositionBuild[i][3])
 		op.GeoM.Translate(m.game_state.Village.TabPositionBuild[i][0] - float64(diff), m.game_state.Village.TabPositionBuild[i][1])
 
-		screen.DrawImage(ChooseBuildImg(m.game_state.Village,m.game_state.Village.TabBuild[i]),op)
+		screen.DrawImage(m.game_state.Village.ChooseBuildImg(m.game_state.Village.TabBuild[i]),op)
 	}
 
 	op = &ebiten.DrawImageOptions{}
