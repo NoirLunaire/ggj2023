@@ -1,17 +1,17 @@
 0;Couronnement;Cérémonie au cours de laquelle on couronne le Roi des Francs;0;1
 1;Bâtiments;Les bucherons du village veulent couper les arbres sur lequel les enfants jouent...;2;3
-2;Serf;Messire ! Mon village a été piller et dévaster par des bandits, Nous venons vous demander clémence votre grâce et de nous laisser habiter en ville quelque temps...;4;5;6
-3;Serf;Votre grâce, le maladie à frapper ma femme cette hiver... Je n'ai pas les moyens de payer les soins... Pouver vous me céder quelque pièces ?;7;8;9
-4;Serf;Votr Grôche, jsuis un hunble pécheu'r et imaginé c'qui m'est arrivé la vieille, j'étai au lac entre d'pécher et jfais mouche, un sacré bestiau ! il tirais tellement fort qu'il ma emporter avec ma canne! Cha vous dirais pas de m'aider à en rachetez une ?;10;11;12
+2;Serf;Messire ! Mon village a été piller et dévaster par des bandits,\nNous venons vous demander clémence votre grâce et de nous laisser habiter en ville quelque temps...;4;5;6
+3;Serf;Votre grâce, le maladie à frapper ma femme cette hiver...\nJe n'ai pas les moyens de payer les soins...\nPouver vous me céder quelque pièces ?;7;8;9
+4;Serf;Votr Grôche, jsuis un hunble pécheu'r et imaginé c'qui m'est arrivé la vieille,\nj'étai au lac entre d'pécher et jfais mouche, un sacré bestiau ! il tirais tellement fort qu'il ma emporter avec ma canne! Cha vous dirais pas de m'aider à en rachetez une ?;10;11;12
 5;Serf;Un peu... j'aime bien boir en va dire, dpuis que ma femme est parti la vie est compliqué vous chavez ?;13;14
-6;Essor;Votre Grôche Jsui de retour... j'ai arreter dboire car maintenant c'est moi qui vend dlacool! j'ai ouvert ma propre taverne ! Grâche à vous Messire! Tennez quelque pièce pour m'avoir t'emps aider !;15
-7;Cerf;Mon seigneur une sorcière nous a maudit ! Moi et mon village ! Elle habite dans la forêt à coter, vous devez nous aider! Ou sinon nos cultures risque de périre et nos enfant de tomber malade!;16;17;18;19
-8;Bourgeois;Votre Grâce, il semblerais que vos finance de ce passe pas pour le mieux ces derniers temps, Si vous voulez je peut vous prêter de l'argent dès maintenant et vous me rembourserer dans quelque temps, avec intérêt bien entendu;20;21;22
+6;Essor;Votre Grôche Jsui de retour... j'ai arreter dboire car maintenant c'est moi qui vend dlacool!\nj'ai ouvert ma propre taverne ! Grâche à vous Messire! Tennez quelque pièce pour m'avoir t'emps aider !;15
+7;Serf;Mon seigneur une sorcière nous a maudit ! Moi et mon village !\n\nElle habite dans la forêt à coter, vous devez nous aider!\nOu sinon nos cultures risque de périre et nos enfant de tomber malade!;16;17;18;19
+8;Bourgeois;Votre Grâce, il semblerais que vos finance de ce passe pas pour le mieux ces derniers temps,\nSi vous voulez je peut vous prêter de l'argent dès maintenant et vous me rembourserer dans quelque temps, avec intérêt bien entendu;20;21;22
 9;Bourgeois;Votre Grâce, je viens récupérer mon dû avec mes intérêt!;23;24
-10;Serf;Messire ! Les mineurs ont de plus en plus de mal d'extraire du minérai, nos mines s'épuisent ! Que pouvons nous faire;25;26;27
+10;Serf;Messire ! Les mineurs ont de plus en plus de mal d'extraire du minérai,\nnos mines s'épuisent ! Que pouvons nous faire;25;26;27
 11;Piaf; Couac Couuuiac gnouaaac (un corbeau tient quelquechose de brillant dans son bec);28;29
 12;Servante;Une servante ripe en vous servant un verre de vin, tachant ainsi votre chandail;30;31
 13;Général;Mon seigneur la garde et les hommes attende leur paye!;32;33
-14;Bourgeois;Mon roi ! J'ai un problème pour le moins personnel... j'ai quelque peut friquoter avec une cousinne éloigner... je ne pensais pas qu'un batard naîtrais de cette soirée pour le moins plaisante... Vous êtes roi, vous devez savoir que faire pour ne pas perdre toute crédibilité...;34;35;36;37
-15;Défense;Mon roi, les vikings ont attaqués le village voisin... en tant que capitaine de votre garde je vous conseil la construction d'une tour;38;39
+14;Bourgeois;Mon roi ! J'ai un problème pour le moins personnel...\nj'ai quelque peut friquoter avec une cousinne éloigner...\nje ne pensais pas qu'un batard naîtrais de cette soirée pour le moins plaisante... Vous êtes roi, vous devez savoir que faire pour ne pas perdre toute crédibilité...;34;35;36;37
+15;Défense;Mon roi, les vikings ont attaqués le village voisin..\nen tant que capitaine de votre garde je vous conseil la construction d'une tour;38;39
 16;Maison;Mon roi, les nouvelles populations arrivés ont créé une grosse demande en logement mais nous n'en avons pas assez ! Un peu d'aide financière serait la bienvenue.;40;41
