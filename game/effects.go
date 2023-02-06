@@ -4,7 +4,9 @@ func Nothing (s *State) {}
 
 func BuildTower (s *State) {
 	s.Money -= 4
-	s.Village.TabBuild = append(s.Village.TabBuild,[2]int{Tower,1})
+	if (len(s.Village.TabBuild) != 6){
+		s.Village.TabBuild = append(s.Village.TabBuild,[2]int{Tower,1})
+	}
 }
 
 // M = minus, P = Plus

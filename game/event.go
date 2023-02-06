@@ -48,7 +48,7 @@ func LoadEvents () []*Event {
 	for _, value := range lines {
 		res := strings.Split(value,";")
 		tabChoice := []int{}
-	
+		
 		for i := 3 ; i < len(res); i++ {
 			casted, err := strconv.Atoi(res[i])
 			if err != nil {
@@ -67,7 +67,7 @@ func LoadEvents () []*Event {
 		tab = append(tab,&Event{
 			id,
 			res[1],
-			res[2],
+			strings.ReplaceAll(res[2], `\n`, "\n"),
 			tabChoice,
 		}) 
 	}

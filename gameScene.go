@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"fmt"
 	"bytes"
 	"image/color"
 	"golang.org/x/image/font"
@@ -124,9 +125,8 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Translate(740 - float64(diff), 0)
 	screen.DrawImage(m.imgBgRight, op)
 
-	
-	
-	
+	fmt.Println("size :",len( m.game_state.Village.TabBuild))
+
 	for i := 0 ; i < len( m.game_state.Village.TabBuild);i++ {
 		op = &ebiten.DrawImageOptions{}
 		op.GeoM.Scale(m.game_state.Village.TabPositionBuild[i][2], m.game_state.Village.TabPositionBuild[i][3])
