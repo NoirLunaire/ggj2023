@@ -12,7 +12,7 @@ func BuildTower (s *State) {
 // always in the above order
 
 func addEvents (s *State) {
-	s.EventPool = []int{ /*1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,*/ 15 }
+	s.EventPool = []int{ /*1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,*/ 16 }
 }
 
 func P1Hap (s *State) {
@@ -159,5 +159,10 @@ func M1HapM2Pop (s *State) {
 
 func M1Pop (s *State) {
 	s.Population -= 1
+}
+
+func P1HapM5Mon (s *State) {
+	s.Happiness += 1
+	s.Money -= 5
 }
 

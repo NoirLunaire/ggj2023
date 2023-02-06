@@ -95,6 +95,8 @@ func LoadEffects () map[int]func(s *State) {
 	m[37] = M1Pop
 	m[38] = BuildTower
 	m[39] = M3Hap
+	m[40] = M3Hap
+	m[41] = P1HapM5Mon 
 	return m
 }
 
