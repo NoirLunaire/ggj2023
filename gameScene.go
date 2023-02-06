@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"fmt"
 	"bytes"
 	"image/color"
 	"golang.org/x/image/font"
@@ -36,8 +35,6 @@ type GameScene struct {
 	imgBgLeft	*ebiten.Image
 	imgBgRight	*ebiten.Image
 	imgBorderDate	*ebiten.Image
-	
-	imgTower	*ebiten.Image
 }
 
 func LoadGame (name string ,s *State) *GameScene {
@@ -81,8 +78,7 @@ func NewGame () *GameScene {
 	imgBgLeft, _, erre := ebitenutil.NewImageFromFile("data/image/backgroundLeft.png")
 	imgBgRight, _, errer := ebitenutil.NewImageFromFile("data/image/backgroundRight.png")
 	imgBorderDate, _, errero := ebitenutil.NewImageFromFile("data/image/dateBorder.png")
-	imgTower, _, erreror := ebitenutil.NewImageFromFile("data/image/tower1.png")
-	if err != nil  || erre != nil || errer != nil || errero != nil || erreror != nil{
+	if err != nil  || erre != nil || errer != nil || errero != nil{
 		log.Fatalf("Failed to load image: %v", err)
 	}
 	
@@ -101,7 +97,6 @@ func NewGame () *GameScene {
 		imgBgLeft,
 		imgBgRight,
 		imgBorderDate,
-		imgTower,
 	}
 }
 
@@ -125,13 +120,13 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Translate(740 - float64(diff), 0)
 	screen.DrawImage(m.imgBgRight, op)
 
-	fmt.Println("size :",len( m.game_state.Village.TabBuild))
 
 	for i := 0 ; i < len( m.game_state.Village.TabBuild);i++ {
 		op = &ebiten.DrawImageOptions{}
 		op.GeoM.Scale(m.game_state.Village.TabPositionBuild[i][2], m.game_state.Village.TabPositionBuild[i][3])
 		op.GeoM.Translate(m.game_state.Village.TabPositionBuild[i][0] - float64(diff), m.game_state.Village.TabPositionBuild[i][1])
-		screen.DrawImage(m.imgTower,op)
+
+		screen.DrawImage(ChooseBuildImg(m.game_state.Village,m.game_state.Village.TabBuild[i]),op)
 	}
 
 	op = &ebiten.DrawImageOptions{}
@@ -156,11 +151,6 @@ func (m *GameScene) Update(g *Game) error {
 			false,
 		}
 	}
-
-	if !m.audioPlayer.IsPlaying() {
-		m.audioPlayer.Play()
-	}
-
 
 	mgr.Update(1.0/60.0)
 	bole := true

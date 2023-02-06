@@ -42,9 +42,9 @@ func NewState () *State {
 	return &State{
 		15,
 		time.Date(1000, time.January, 1, 12, 0, 0, 0, time.UTC),
-		50,
-		50,
-		50,
+		100,
+		100,
+		100,
 		[]int{ 0 },
 		NewVillage(),
 		LoadEvents(),
@@ -95,6 +95,8 @@ func LoadEffects () map[int]func(s *State) {
 	m[37] = M1Pop
 	m[38] = BuildTower
 	m[39] = M3Hap
+	m[40] = BuildHouse
+	m[41] = P1HapM5Mon 
 	return m
 }
 
