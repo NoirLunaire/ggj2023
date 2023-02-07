@@ -42,9 +42,9 @@ func NewState () *State {
 	return &State{
 		15,
 		time.Date(481, time.January, 1, 12, 0, 0, 0, time.UTC),
-		100,
-		100,
-		100,
+		50,
+		50,
+		50,
 		[]int{ 0 },
 		NewVillage(),
 		LoadEvents(),
@@ -108,19 +108,21 @@ func SaveGame (name string, s *State) {
 	err = f.Truncate(0)
 	CheckError(err)
 
-	if (s == nil){
-		save = "15;01-01-1000;10;10;10;0;"
-	}else{
-		
+	if s == nil {
+		save += "15;01-01-481;5;5;5;\n0;\n"
+	} else {
 		save += strconv.Itoa(s.King_age) + ";"
 		save += s.Date.Format("02-01-2006") + ";"
 		save += strconv.Itoa(s.Happiness) + ";"
 		save += strconv.Itoa(s.Money) + ";"
 		save += strconv.Itoa(s.Population) + ";"
-		//save += strconv.Itoa(s.Tower) + ";"
+		save += "\n"
 		for i := 0; i < len(s.EventPool); i++ {
 			save += strconv.Itoa(s.EventPool[i]) + ";"
 		}
+
+		save += "\n"
+		save += s.Village.SaveVillage()
 	}
 	_, err = f.WriteString(save)
 	if err != nil {
@@ -142,11 +144,14 @@ func LoadSave (name string) (*State, error)  {
 	}
 
 	data := string(list)
-	tab := strings.Split(data, ";")
-	if len(tab) <= 6 {
+	things := strings.Split(data, "\n")
+	tab := strings.Split(things[0], ";")
+	events := strings.Split(things[1], ";")
+	builds := things[2]
+
+	if len(tab) <= 5 {
 		return nil, errors.New("Incorrect file")
 	}
-	fmt.Println(tab)
 	var state State
 	state.King_age, err = strconv.Atoi(tab[0])
 	if err != nil {
@@ -164,18 +169,18 @@ func LoadSave (name string) (*State, error)  {
 	}
 
 	state.Money, err = strconv.Atoi(tab[3])
+	if err != nil {
+		return nil, err
+	}
 
 	state.Population, err = strconv.Atoi(tab[4])
 	if err != nil {
 		return nil, err
 	}
 
-	//state.Tower, err = strconv.Atoi(tab[5])
-	if err != nil {
-		return nil, err
-	}
-	for i := 5; i < len(tab) - 1; i++ {
-		j, err := strconv.Atoi(tab[i])
+	state.Village = LoadVillage(builds)
+	for i := 0; i < len(events) - 1; i++ {
+		j, err := strconv.Atoi(events[i])
 		if err != nil {
 			return nil, errors.New("Invalid save")
 		}

@@ -31,7 +31,7 @@ func (m *SelectGame) Update(g *Game) error {
 		if m.loaded != nil {
 			imgui.SetNextWindowPos(imgui.Vec2{ 1280 / 2 - 100, 100 })
 			imgui.BeginV("Error", &bole, gui_flags)
-			imgui.Text("Erreur lors du chargement de la sauvegarde")
+			imgui.Text("Erreur lors du chargement de la sauvegarde : " + m.loaded.Error())
 			imgui.End()
 		}
 

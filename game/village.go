@@ -5,6 +5,8 @@ import (
 	"time"
 	"log"
 
+	"strings"
+	"strconv"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2"
 )
@@ -22,7 +24,28 @@ type Village struct {
 	TabImg	[][]*ebiten.Image
 }
 
+func (v *Village) SaveVillage () string {
+	s := ""
+	for i := 0; i < len(v.TabBuild); i++ {
+		s += strconv.Itoa(v.TabBuild[i][0])
+		s += ";"
+		s += strconv.Itoa(v.TabBuild[i][1])
+	}
+	return s
+}
 
+func LoadVillage (vdata string) *Village {
+	v := NewVillage()
+	builds := strings.Split(vdata, ";")
+	for i := 0; i < (len(builds) - 1); i += 2 {
+		x, err := strconv.Atoi(builds[i])
+		CheckError(err)
+		y, err := strconv.Atoi(builds[i+1])
+		CheckError(err)
+		v.TabBuild = append(v.TabBuild, [2]int{ x, y })
+	}
+	return v
+}
 
 func NewVillage () *Village {
 	var TabPositionBuild  [][4]float64

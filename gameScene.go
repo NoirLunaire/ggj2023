@@ -35,6 +35,8 @@ type GameScene struct {
 	imgBgLeft	*ebiten.Image
 	imgBgRight	*ebiten.Image
 	imgBorderDate	*ebiten.Image
+
+	imgClovis	*ebiten.Image
 }
 
 func LoadGame (name string ,s *State) *GameScene {
@@ -78,7 +80,8 @@ func NewGame () *GameScene {
 	imgBgLeft, _, erre := ebitenutil.NewImageFromFile("data/image/backgroundLeft.png")
 	imgBgRight, _, errer := ebitenutil.NewImageFromFile("data/image/backgroundRight.png")
 	imgBorderDate, _, errero := ebitenutil.NewImageFromFile("data/image/dateBorder.png")
-	if err != nil  || erre != nil || errer != nil || errero != nil{
+	imgClovis, _, erreror := ebitenutil.NewImageFromFile("data/image/clovis.png")
+	if err != nil  || erre != nil || errer != nil || errero != nil || erreror != nil{
 		log.Fatalf("Failed to load image: %v", err)
 	}
 	
@@ -97,6 +100,7 @@ func NewGame () *GameScene {
 		imgBgLeft,
 		imgBgRight,
 		imgBorderDate,
+		imgClovis,
 	}
 }
 
@@ -120,7 +124,8 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Translate(740 - float64(diff), 0)
 	screen.DrawImage(m.imgBgRight, op)
 
-
+	
+	
 	for i := 0 ; i < len( m.game_state.Village.TabBuild);i++ {
 		op = &ebiten.DrawImageOptions{}
 		op.GeoM.Scale(m.game_state.Village.TabPositionBuild[i][2], m.game_state.Village.TabPositionBuild[i][3])
@@ -133,6 +138,10 @@ func (m *GameScene) Draw (screen *ebiten.Image) {
 	op.GeoM.Translate(0, 0)
 	op.GeoM.Scale(0.67, 0.562)
 	screen.DrawImage(m.imgHall, op)
+
+	op.GeoM.Translate(580, 130)
+	op.GeoM.Scale(1, 1)
+	screen.DrawImage(m.imgClovis, op)
 
 	DrawDate(screen,m)
 	DrawTPS(screen)
@@ -169,7 +178,7 @@ func (m *GameScene) Update(g *Game) error {
 						m.current_event = m.game_state.EventList[5]
 					} else {
 						m.has_event = false
-						m.timer = ebiten.ActualTPS() * 6
+						m.timer = ebiten.ActualTPS() * float64(random.Intn(5) + 5)
 						m.current_event = nil
 						m.is_pause = false
 					}
