@@ -42,9 +42,9 @@ func NewState () *State {
 	return &State{
 		15,
 		time.Date(481, time.January, 1, 12, 0, 0, 0, time.UTC),
-		50,
-		50,
-		50,
+		10,
+		10,
+		10,
 		[]int{ 0 },
 		NewVillage(),
 		LoadEvents(),
