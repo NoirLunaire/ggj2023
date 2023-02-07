@@ -30,6 +30,7 @@ func (v *Village) SaveVillage () string {
 		s += strconv.Itoa(v.TabBuild[i][0])
 		s += ";"
 		s += strconv.Itoa(v.TabBuild[i][1])
+		s += ";"
 	}
 	return s
 }
